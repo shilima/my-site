@@ -1,0 +1,38 @@
+---
+import { getCollection, render } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+
+export async function getStaticPaths() {
+  const resources = await getCollection('resources');
+  return resources.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<PostLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  pubDate={entry.data.pubDate}
+  lang={entry.data.lang}
+  backHref="/resources"
+  backLabel="Resources"
+>
+  {
+    entry.data.url && (
+      <a
+        href={entry.data.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 font-sans text-sm uppercase tracking-[0.2em] text-neutral-900 border-b border-neutral-900 pb-1 hover:text-neutral-500 hover:border-neutral-500 mb-10 no-underline"
+      >
+        Visit ↗
+      </a>
+    )
+  }
+  <Content />
+</PostLayout>

@@ -4,7 +4,11 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-const label = lang === 'zh' ? '中' : 'EN';
+const label = lang === 'zh' ? '中文' : 'EN';
 ---
 
-<span data-lang={lang}>{label}</span>
+<span
+  class="font-sans text-[10px] uppercase tracking-[0.25em] text-neutral-500 border border-neutral-300 px-2 py-0.5"
+>
+  {label}
+</span>

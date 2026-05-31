@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+
+const notes = (await getCollection('notes')).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+);
+---
+
+<BaseLayout title="Notes · Shilima-Wonfon">
+  <section class="mx-auto max-w-3xl px-6 pt-24 pb-32">
+    <header class="mb-20">
+      <p
+        class="font-sans text-xs uppercase tracking-[0.25em] text-neutral-500 mb-6"
+      >
+        Field Notes
+      </p>
+      <h1
+        class="font-serif font-light text-4xl md:text-5xl text-neutral-900 leading-tight tracking-tight"
+      >
+        Notes
+      </h1>
+    </header>
+
+    {
+      notes.length === 0 ? (
+        <p class="font-serif text-neutral-500">No notes yet.</p>
+      ) : (
+        <div>
+          {notes.map((entry) => (
+            <PostCard
+              title={entry.data.title}
+              href={`/notes/${entry.id}`}
+              pubDate={entry.data.pubDate}
+              lang={entry.data.lang}
+            />
+          ))}
+        </div>
+      )
+    }
+  </section>
+</BaseLayout>

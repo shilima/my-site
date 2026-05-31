@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import LangBadge from '../components/LangBadge.astro';
 
 interface Props {
   title: string;
@@ -7,18 +8,133 @@ interface Props {
   pubDate: Date;
   updatedDate?: Date;
   lang?: 'zh' | 'en';
-  tags?: string[];
+  backHref?: string;
+  backLabel?: string;
 }
 
-const { title, description, pubDate, updatedDate, lang = 'zh', tags = [] } = Astro.props;
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  lang = 'zh',
+  backHref = '/',
+  backLabel = 'Back',
+} = Astro.props;
+
+const dateStr = pubDate.toISOString().slice(0, 10);
+const updatedStr = updatedDate?.toISOString().slice(0, 10);
 ---
 
 <BaseLayout title={title} description={description} lang={lang}>
-  <article>
-    <header>
-      <h1>{title}</h1>
-      <!-- pubDate / updatedDate / lang / tags 渲染待补 -->
+  <article class="mx-auto max-w-2xl px-6 pt-20 pb-32">
+    <a
+      href={backHref}
+      class="font-sans text-xs uppercase tracking-[0.2em] text-neutral-500 hover:text-neutral-900"
+    >
+      ← {backLabel}
+    </a>
+
+    <header class="mt-14 mb-16">
+      <div class="flex items-center gap-3 mb-6">
+        <time
+          class="font-sans text-xs uppercase tracking-[0.2em] text-neutral-500"
+          datetime={pubDate.toISOString()}
+        >
+          {dateStr}
+        </time>
+        <span class="text-neutral-300">·</span>
+        <LangBadge lang={lang} />
+      </div>
+
+      <h1
+        class="font-serif font-light text-4xl md:text-5xl text-neutral-900 leading-[1.15] tracking-tight mb-6"
+      >
+        {title}
+      </h1>
+
+      {
+        description && (
+          <p class="font-serif text-lg text-neutral-600 leading-relaxed">
+            {description}
+          </p>
+        )
+      }
+
+      {
+        updatedStr && (
+          <p class="font-sans text-xs text-neutral-400 mt-6">
+            Updated {updatedStr}
+          </p>
+        )
+      }
     </header>
-    <slot />
+
+    <div class="post-body font-serif text-lg text-neutral-800 leading-loose">
+      <slot />
+    </div>
   </article>
 </BaseLayout>
+
+<style is:global>
+  .post-body > * + * {
+    margin-top: 1.4em;
+  }
+  .post-body h2 {
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-top: 2.4em;
+    line-height: 1.3;
+  }
+  .post-body h3 {
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-top: 2em;
+    line-height: 1.3;
+  }
+  .post-body a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .post-body a:hover {
+    color: #525252;
+  }
+  .post-body ul {
+    list-style: disc;
+    padding-left: 1.5em;
+  }
+  .post-body ol {
+    list-style: decimal;
+    padding-left: 1.5em;
+  }
+  .post-body li + li {
+    margin-top: 0.5em;
+  }
+  .post-body blockquote {
+    border-left: 1px solid #d4d4d4;
+    padding-left: 1.25em;
+    font-style: italic;
+    color: #525252;
+  }
+  .post-body code {
+    font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+    font-size: 0.9em;
+    background: #f5f5f5;
+    padding: 0.1em 0.35em;
+  }
+  .post-body pre {
+    background: #f5f5f5;
+    padding: 1em 1.25em;
+    overflow-x: auto;
+    font-size: 0.9em;
+  }
+  .post-body pre code {
+    background: transparent;
+    padding: 0;
+  }
+  .post-body hr {
+    border: none;
+    border-top: 1px solid #e5e5e5;
+    margin: 3em 0;
+  }
+</style>

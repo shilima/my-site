@@ -7,20 +7,35 @@ interface Props {
   href: string;
   pubDate: Date;
   lang?: 'zh' | 'en';
-  tags?: string[];
 }
 
-const { title, description, href, pubDate, lang = 'zh', tags = [] } = Astro.props;
+const { title, description, href, pubDate, lang = 'zh' } = Astro.props;
+const dateStr = pubDate.toISOString().slice(0, 10);
 ---
 
-<article>
-  <a href={href}>
-    <h3>{title}</h3>
-    {description && <p>{description}</p>}
-    <div>
-      <LangBadge lang={lang} />
-      <time datetime={pubDate.toISOString()}>{pubDate.toDateString()}</time>
-      <!-- tags 渲染待补 -->
-    </div>
-  </a>
+<article class="py-10 border-b border-neutral-200 last:border-b-0">
+  <div class="flex items-center gap-3 mb-5">
+    <time
+      class="font-sans text-xs uppercase tracking-[0.2em] text-neutral-500"
+      datetime={pubDate.toISOString()}
+    >
+      {dateStr}
+    </time>
+    <span class="text-neutral-300">·</span>
+    <LangBadge lang={lang} />
+  </div>
+
+  <h2
+    class="font-serif font-light text-2xl md:text-3xl text-neutral-900 leading-tight mb-3"
+  >
+    <a href={href} class="hover:text-neutral-600">{title}</a>
+  </h2>
+
+  {
+    description && (
+      <p class="font-serif text-base md:text-lg text-neutral-600 leading-relaxed">
+        {description}
+      </p>
+    )
+  }
 </article>
