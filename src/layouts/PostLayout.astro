@@ -1,0 +1,24 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  lang?: 'zh' | 'en';
+  tags?: string[];
+}
+
+const { title, description, pubDate, updatedDate, lang = 'zh', tags = [] } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} lang={lang}>
+  <article>
+    <header>
+      <h1>{title}</h1>
+      <!-- pubDate / updatedDate / lang / tags 渲染待补 -->
+    </header>
+    <slot />
+  </article>
+</BaseLayout>

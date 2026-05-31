@@ -1,0 +1,26 @@
+---
+import LangBadge from './LangBadge.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  href: string;
+  pubDate: Date;
+  lang?: 'zh' | 'en';
+  tags?: string[];
+}
+
+const { title, description, href, pubDate, lang = 'zh', tags = [] } = Astro.props;
+---
+
+<article>
+  <a href={href}>
+    <h3>{title}</h3>
+    {description && <p>{description}</p>}
+    <div>
+      <LangBadge lang={lang} />
+      <time datetime={pubDate.toISOString()}>{pubDate.toDateString()}</time>
+      <!-- tags 渲染待补 -->
+    </div>
+  </a>
+</article>

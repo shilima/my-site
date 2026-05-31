@@ -1,0 +1,10 @@
+---
+interface Props {
+  lang: 'zh' | 'en';
+}
+
+const { lang } = Astro.props;
+const label = lang === 'zh' ? '中' : 'EN';
+---
+
+<span data-lang={lang}>{label}</span>
