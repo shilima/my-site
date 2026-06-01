@@ -33,7 +33,9 @@ const { title = 'Shilima-Wonfon', description = '', lang = 'zh' } = Astro.props;
     />
   </head>
   <body class="min-h-screen flex flex-col">
-    <Header />
+    <slot name="header">
+      <Header />
+    </slot>
     <main class="flex-1">
       <slot />
     </main>
