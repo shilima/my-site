@@ -100,14 +100,14 @@ const stats = [
               {latestNote.data.title}
             </a>
           </h2>
-          <div class="relative mb-8">
+          <div class="relative mb-8 max-h-20 overflow-hidden">
             <div class="font-serif text-base md:text-lg text-neutral-600 leading-relaxed">
               {previewLines.map((line, i) => (
                 <p class={i > 0 ? 'mt-3' : ''}>{line}</p>
               ))}
             </div>
             <div
-              class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent"
+              class="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-white to-transparent"
             />
           </div>
           <a
