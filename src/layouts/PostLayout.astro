@@ -73,7 +73,25 @@ const updatedStr = updatedDate?.toISOString().slice(0, 10);
     <div class="post-body font-serif text-lg text-neutral-800 leading-loose">
       <slot />
     </div>
+
+    <section class="mt-24 border-t border-neutral-200 pt-12">
+      <h2 class="font-sans text-xs uppercase tracking-[0.2em] text-neutral-500 mb-8">
+        Comments
+      </h2>
+      <div id="tcomment"></div>
+    </section>
   </article>
+
+  <script
+    is:inline
+    src="https://cdn.jsdelivr.net/npm/twikoo@1.6.44/dist/twikoo.all.min.js"
+  ></script>
+  <script is:inline>
+    twikoo.init({
+      envId: 'https://twikoo-cloudflare.sbjyemail.workers.dev',
+      el: '#tcomment',
+    });
+  </script>
 </BaseLayout>
 
 <style is:global>
@@ -136,5 +154,37 @@ const updatedStr = updatedDate?.toISOString().slice(0, 10);
     border: none;
     border-top: 1px solid #e5e5e5;
     margin: 3em 0;
+  }
+
+  /* Twikoo — coerce accents to the site's black-and-white palette */
+  #tcomment {
+    --el-color-primary: #171717;
+    --el-color-primary-light-3: #404040;
+    --el-color-primary-light-5: #525252;
+    --el-color-primary-light-7: #a3a3a3;
+    --el-color-primary-light-8: #d4d4d4;
+    --el-color-primary-light-9: #f5f5f5;
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+    color: #404040;
+  }
+  #tcomment a {
+    color: #171717;
+  }
+  #tcomment .tk-submit .el-button--primary,
+  #tcomment .tk-submit .el-button--primary:hover,
+  #tcomment .tk-submit .el-button--primary:focus {
+    background: #171717;
+    border-color: #171717;
+    color: #fafafa;
+    border-radius: 0;
+  }
+  #tcomment .el-textarea__inner,
+  #tcomment .el-input__inner,
+  #tcomment .el-input__wrapper {
+    border-radius: 0;
+  }
+  #tcomment .tk-nick,
+  #tcomment .tk-meta {
+    color: #171717;
   }
 </style>
