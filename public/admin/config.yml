@@ -1,3 +1,5 @@
+# No base_url / OAuth proxy: sign in with a fine-grained GitHub
+# Personal Access Token (Sveltia CMS supports PAT login directly).
 backend:
   name: github
   repo: shilima/my-site
