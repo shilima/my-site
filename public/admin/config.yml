@@ -1,0 +1,99 @@
+backend:
+  name: github
+  repo: shilima/my-site
+  branch: main
+
+media_folder: public/uploads
+public_folder: /uploads
+
+# Force clean, lowercase, hyphen-separated slugs for new entries
+slug:
+  encoding: unicode
+  clean_accents: true
+  sanitize_replacement: "-"
+
+collections:
+  - name: notes
+    label: Notes
+    folder: src/content/notes
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: string, required: false }
+      - {
+          label: Pub Date,
+          name: pubDate,
+          widget: datetime,
+          date_format: "YYYY-MM-DD",
+          time_format: false,
+          format: "YYYY-MM-DD",
+        }
+      - {
+          label: Lang,
+          name: lang,
+          widget: select,
+          options: ["zh", "en"],
+          default: "zh",
+        }
+      - { label: Tags, name: tags, widget: list, default: [] }
+      - { label: Body, name: body, widget: markdown, required: false }
+
+  - name: articles
+    label: Articles
+    folder: src/content/articles
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: string, required: false }
+      - {
+          label: Pub Date,
+          name: pubDate,
+          widget: datetime,
+          date_format: "YYYY-MM-DD",
+          time_format: false,
+          format: "YYYY-MM-DD",
+        }
+      - {
+          label: Lang,
+          name: lang,
+          widget: select,
+          options: ["zh", "en"],
+          default: "zh",
+        }
+      - { label: Tags, name: tags, widget: list, default: [] }
+      - { label: Body, name: body, widget: markdown, required: false }
+
+  - name: resources
+    label: Resources
+    folder: src/content/resources
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: string, required: false }
+      - { label: URL, name: url, widget: string, required: false }
+      - {
+          label: Pub Date,
+          name: pubDate,
+          widget: datetime,
+          date_format: "YYYY-MM-DD",
+          time_format: false,
+          format: "YYYY-MM-DD",
+        }
+      - {
+          label: Lang,
+          name: lang,
+          widget: select,
+          options: ["zh", "en"],
+          default: "zh",
+        }
+      - { label: Tags, name: tags, widget: list, default: [] }
+      - { label: Body, name: body, widget: markdown, required: false }
