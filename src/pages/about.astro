@@ -1,24 +1,68 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+// 上线日期写在这里，下面的"已经运行 N 天"会自动计算，不用手改
+const launchDate = new Date('2026-05-31');
+const daysOnline = Math.floor(
+  (Date.now() - launchDate.getTime()) / (1000 * 60 * 60 * 24),
+);
 ---
 
-<BaseLayout title="About · Shilima-Wonfon">
+<BaseLayout title="About · Shilima-Wonfon" description="关于我，以及这个网站为什么存在。">
   <section class="mx-auto max-w-3xl px-6 pt-24 pb-32">
-    <header class="mb-20">
-      <p
-        class="font-sans text-xs uppercase tracking-[0.25em] text-neutral-500 mb-6"
-      >
-        About
-      </p>
-      <h1
-        class="font-serif font-light text-4xl md:text-5xl text-neutral-900 leading-tight tracking-tight"
-      >
-        About
-      </h1>
-    </header>
 
-    <p class="font-serif text-lg text-neutral-600 leading-relaxed">
-      关于页内容待补。
+
+    <div class="font-serif text-lg text-neutral-700 leading-loose space-y-6">
+      <p>60岁，今年我退休了。</p>
+      <p>
+        建筑结构设计、图纸审查的工作正式画上了句号。
+      </p>
+      <p>
+        2026 年 5 月 31 日，在 AI 的帮助下，我用一天时间搭起来这个网站。
+        虽说还很简陋，若非没有AI，这件事确是不能做成的。
+        就算是送给自己的退休礼物吧。
+      </p>
+    </div>
+
+    <section class="mt-20">
+      <p class="font-sans text-xs uppercase tracking-[0.25em] text-neutral-500 mb-8">
+        这里记录什么
+      </p>
+      <dl class="space-y-8 font-serif text-lg text-neutral-700 leading-relaxed">
+        <div>
+          <dt class="text-neutral-900">
+            <a href="/articles" class="hover:text-neutral-600 ">Articles</a>
+          </dt>
+          <dd class="mt-2">想清楚了、写得稍长一些的文章。</dd>
+        </div>
+        <div>
+          <dt class="text-neutral-900">
+            <a href="/notes" class="hover:text-neutral-600 ">Notes</a>
+          </dt>
+          <dd class="mt-2">随手记下的日常、心情、投资得失和一些事件。想到什么写什么，不求完整。</dd>
+        </div>
+        <div>
+          <dt class="text-neutral-900">
+            <a href="/resources" class="hover:text-neutral-600 ">Resources</a>
+          </dt>
+          <dd class="mt-2">看过觉得值得留下的书、网站和工具。</dd>
+        </div>
+      </dl>
+    </section>
+
+    
+
+    <section class="mt-20">
+      <p class="font-sans text-xs uppercase tracking-[0.25em] text-neutral-700 mb-8">
+        联系
+      </p>
+      <p class="font-serif text-lg text-neutral-500 leading-loose">
+        每篇文章和笔记下面都有评论区，有话想说，欢迎留言。
+      </p>
+    </section>
+
+    <p class="mt-24 pt-12 border-t border-neutral-200 font-sans text-xs text-neutral-400 tracking-wide">
+      本站自 2026-05-31 上线，已运行 {daysOnline} 天。
     </p>
   </section>
 </BaseLayout>
